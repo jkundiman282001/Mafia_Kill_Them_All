@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia - The Game of Deception</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Pirata+One&display=swap');
+        
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .title-font {
+            font-family: 'Pirata One', system-ui;
+        }
+
+        .role-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .bg-blood {
+            background-color: #8b0000;
+        }
+
+        .text-blood {
+            color: #8b0000;
+        }
+
+        .border-blood {
+            border-color: #8b0000;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center max-w-7xl mx-auto">
+        <h1 class="text-4xl title-font text-blood tracking-widest">MAFIA</h1>
+        <div class="space-x-8 text-lg font-semibold">
+            <a href="#roles" class="hover:text-blood transition">Roles</a>
+            <a href="#how-to-play" class="hover:text-blood transition">How to Play</a>
+            <button class="bg-blood px-6 py-2 rounded-sm hover:bg-red-700 transition duration-300">Play Now</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-black/60 z-10"></div>
+            <!-- Placeholder for atmospheric background image -->
+            <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+        </div>
+        
+        <div class="relative z-20 text-center px-4">
+            <h2 class="text-7xl md:text-9xl title-font mb-4 text-white drop-shadow-2xl">Who Can You Trust?</h2>
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-8 text-gray-300">
+                A city divided. A killer in the shadows. A doctor with a cure. A detective on the trail. 
+                Will the town survive the night?
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-blood text-white px-10 py-4 text-xl font-bold rounded-sm hover:bg-red-700 transition transform hover:scale-105">
+                    Start New Game
+                </button>
+                <button class="border-2 border-white text-white px-10 py-4 text-xl font-bold rounded-sm hover:bg-white hover:text-black transition transform hover:scale-105">
+                    Join Room
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Roles Section -->
+    <section id="roles" class="py-24 bg-[#111]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h3 class="text-5xl title-font text-center mb-16 text-blood">The Four Roles</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Killer -->
+                <div class="role-card bg-[#1a1a1a] p-8 border-t-4 border-blood">
+                    <div class="text-blood text-5xl mb-4">🔪</div>
+                    <h4 class="text-2xl font-bold mb-3 title-font uppercase tracking-wider">The Killer</h4>
+                    <p class="text-gray-400">The predator. Your goal is to eliminate all townsfolk without being caught. Every night, you choose a victim.</p>
+                </div>
+
+                <!-- Detective -->
+                <div class="role-card bg-[#1a1a1a] p-8 border-t-4 border-blue-800">
+                    <div class="text-blue-800 text-5xl mb-4">🔍</div>
+                    <h4 class="text-2xl font-bold mb-3 title-font uppercase tracking-wider">The Detective</h4>
+                    <p class="text-gray-400">The investigator. Each night, you can investigate one player to reveal their true alignment. Lead the town to justice.</p>
+                </div>
+
+                <!-- Doctor -->
+                <div class="role-card bg-[#1a1a1a] p-8 border-t-4 border-green-800">
+                    <div class="text-green-800 text-5xl mb-4">🧪</div>
+                    <h4 class="text-2xl font-bold mb-3 title-font uppercase tracking-wider">The Doctor</h4>
+                    <p class="text-gray-400">The protector. Choose one person each night to save from a potential attack. You can even save yourself once.</p>
+                </div>
+
+                <!-- Townsfolk -->
+                <div class="role-card bg-[#1a1a1a] p-8 border-t-4 border-gray-600">
+                    <div class="text-gray-600 text-5xl mb-4">👥</div>
+                    <h4 class="text-2xl font-bold mb-3 title-font uppercase tracking-wider">Townsfolk</h4>
+                    <p class="text-gray-400">The backbone. You have no special powers at night, but your vote during the day is the town's only weapon.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section id="how-to-play" class="py-24 bg-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="text-5xl title-font mb-12 text-blood">How the Game Works</h3>
+            <div class="space-y-12 text-left">
+                <div class="flex gap-6 items-start">
+                    <span class="text-4xl title-font text-blood">01</span>
+                    <div>
+                        <h5 class="text-2xl font-bold mb-2">The Night Phase</h5>
+                        <p class="text-gray-400 leading-relaxed">The city sleeps. The Killer strikes, the Doctor heals, and the Detective investigates. All actions are secret until the sun rises.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <span class="text-4xl title-font text-blood">02</span>
+                    <div>
+                        <h5 class="text-2xl font-bold mb-2">The Day Phase</h5>
+                        <p class="text-gray-400 leading-relaxed">The town wakes up to find who was lost. Discussion begins. Use logic, intuition, and deception to find the killer among you.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <span class="text-4xl title-font text-blood">03</span>
+                    <div>
+                        <h5 class="text-2xl font-bold mb-2">The Trial</h5>
+                        <p class="text-gray-400 leading-relaxed">The town votes to eliminate one suspect. If the town eliminates all killers, they win. If the killer outnumbers the town, the shadows prevail.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-900 text-center text-gray-600">
+        <p class="title-font text-2xl mb-4 text-blood tracking-widest">MAFIA</p>
+        <p>&copy; 2025 Mafia Online. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
