@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (startButton) {
         startButton.addEventListener('click', () => {
-            alert('Game initialization coming soon! This will open the lobby creation screen.');
+            window.location.href = 'game-room.html';
         });
     }
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         joinButton.addEventListener('click', () => {
             const roomCode = prompt('Enter Room Code:');
             if (roomCode) {
-                alert(`Attempting to join room: ${roomCode}`);
+                window.location.href = 'game-room.html';
             }
         });
     }
