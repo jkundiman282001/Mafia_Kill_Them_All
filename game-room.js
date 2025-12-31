@@ -57,6 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
         addChatMessage(data.user, data.message, data.color);
     });
 
+    // Phase Updates (if implemented on server later)
+    channel.bind('phase-change', (data) => {
+        gameStatus.textContent = `PHASE: ${data.phase.toUpperCase()} - DAY ${data.day}`;
+        if (data.phase === 'night') {
+            document.body.classList.add('night-mode');
+            addChatMessage('System', 'Night falls. The city is silent...', 'text-blue-500');
+        } else {
+            document.body.classList.remove('night-mode');
+            addChatMessage('System', 'The sun rises. Discussion begins.', 'text-yellow-500');
+        }
+    });
+
     // Render Players
     function renderPlayers() {
         playersGrid.innerHTML = currentPlayers.map(player => `
@@ -92,6 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Chat Logic
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = chatForm.querySelector('input');
+        const message = input.value.trim();
+        
+        if (message) {
+            fetch('/api/send-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ roomCode, message, username })
+            });
+            input.value = '';
+        }
+    });
+
     function addChatMessage(user, message, colorClass = 'text-blood') {
         const msgDiv = document.createElement('div');
         msgDiv.className = 'bg-[#1a1a1a] p-3 rounded animate-fade-in';

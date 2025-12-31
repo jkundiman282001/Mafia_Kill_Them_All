@@ -6,6 +6,11 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, ".")));
 
+// Explicitly serve index.html for the root route
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
 // NOTE: You need to get these from pusher.com (Free Tier)
 // and set them in your Vercel Environment Variables
 const pusher = new Pusher({
@@ -73,6 +78,10 @@ app.post("/api/vote", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
