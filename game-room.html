@@ -4,50 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Room - Mafia</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Pirata+One&display=swap');
-        
-        body {
-            background-color: #0a0a0a;
-            color: #e5e5e5;
-            font-family: 'Crimson Text', serif;
-        }
-
-        .title-font {
-            font-family: 'Pirata One', system-ui;
-        }
-
-        .player-card {
-            background: #1a1a1a;
-            border: 2px solid #333;
-            transition: all 0.3s ease;
-        }
-
-        .player-card.active {
-            border-color: #8b0000;
-            box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
-        }
-
-        .player-card.dead {
-            opacity: 0.5;
-            filter: grayscale(1);
-            text-decoration: line-through;
-        }
-
-        .chat-container {
-            height: calc(100vh - 200px);
-        }
-
-        .bg-blood { background-color: #8b0000; }
-        .text-blood { color: #8b0000; }
-        .border-blood { border-color: #8b0000; }
-
-        .night-mode {
-            background-color: #050505;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="h-screen overflow-hidden flex flex-col">
     <!-- Game Header -->
@@ -110,7 +67,7 @@
         <button id="action-btn" class="bg-blood px-6 py-2 rounded font-bold hover:bg-red-700 transition">INVESTIGATE PLAYER</button>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="game-room.js"></script>
 </body>
 </html>

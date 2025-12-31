@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Pirata+One&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #e5e5e5;
+    font-family: 'Crimson Text', serif;
+}
+
+.title-font {
+    font-family: 'Pirata One', system-ui;
+}
+
+.role-card {
+    @apply transition-all duration-300;
+}
+
+.role-card:hover {
+    @apply -translate-y-2 shadow-[0_10px_20px_rgba(255,0,0,0.2)];
+}
+
+.player-card {
+    @apply bg-[#1a1a1a] border-2 border-[#333] transition-all duration-300;
+}
+
+.player-card.active {
+    @apply border-blood shadow-[0_0_15px_rgba(139,0,0,0.3)];
+}
+
+.player-card.dead {
+    @apply opacity-50 grayscale line-through;
+}
+
+.chat-container {
+    height: calc(100vh - 200px);
+}
+
+.night-mode {
+    @apply bg-[#050505] shadow-[inset_0_0_100px_rgba(0,0,0,0.9)];
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8b0000;
+}
