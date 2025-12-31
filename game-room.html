@@ -12,9 +12,15 @@
         <div class="flex items-center gap-4">
             <h1 class="text-3xl title-font text-blood tracking-widest">MAFIA</h1>
             <div class="h-6 w-[2px] bg-gray-700"></div>
+            <div id="room-info" class="flex items-center gap-2 cursor-pointer group" title="Click to copy room code">
+                <span class="text-xs text-gray-500 uppercase">Room:</span>
+                <span id="display-room-code" class="font-mono font-bold text-white group-hover:text-blood transition">-----</span>
+                <svg class="w-3 h-3 text-gray-500 group-hover:text-blood" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            </div>
+            <div class="h-6 w-[2px] bg-gray-700"></div>
             <div id="game-status" class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></span>
-                <span class="font-bold uppercase tracking-widest text-sm">Day 1 - Discussion</span>
+                <span id="phase-text" class="font-bold uppercase tracking-widest text-sm">Waiting for players...</span>
             </div>
         </div>
         <div class="flex items-center gap-6">

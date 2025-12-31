@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionBar = document.getElementById('action-bar');
     const gameStatus = document.getElementById('game-status');
     const playerRoleDisplay = document.getElementById('player-role');
+    const roomCodeDisplay = document.getElementById('display-room-code');
+    const roomInfo = document.getElementById('room-info');
+    const phaseText = document.getElementById('phase-text');
 
     const urlParams = new URLSearchParams(window.location.search);
     const roomCode = urlParams.get('room');
@@ -22,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'index.html';
         return;
     }
+
+    // Display room code and add copy functionality
+    roomCodeDisplay.textContent = roomCode;
+    roomInfo.addEventListener('click', () => {
+        navigator.clipboard.writeText(roomCode);
+        const originalText = roomCodeDisplay.textContent;
+        roomCodeDisplay.textContent = 'COPIED!';
+        setTimeout(() => roomCodeDisplay.textContent = originalText, 1000);
+    });
 
     let myId = null;
     let currentPlayers = [];
@@ -49,8 +61,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const me = currentPlayers.find(p => p.id === myId);
         if (me) {
             playerRoleDisplay.textContent = me.role.toUpperCase();
+            
+            // Show "Start Game" button only for the host if game hasn't started
+            if (me.isHost && data.phase === 'waiting') {
+                showHostControls();
+            }
         }
     });
+
+    function showHostControls() {
+        if (document.getElementById('start-game-btn')) return;
+        
+        const btn = document.createElement('button');
+        btn.id = 'start-game-btn';
+        btn.className = 'fixed bottom-8 right-8 bg-green-600 text-white px-8 py-3 rounded-full font-bold shadow-2xl hover:bg-green-700 transition transform hover:scale-105 animate-bounce';
+        btn.textContent = 'START GAME';
+        btn.onclick = () => {
+            fetch('/api/start-game', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ roomCode })
+            });
+            btn.remove();
+        };
+        document.body.appendChild(btn);
+    }
 
     // Chat Updates
     channel.bind('new-chat', (data) => {
@@ -59,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Phase Updates (if implemented on server later)
     channel.bind('phase-change', (data) => {
-        gameStatus.textContent = `PHASE: ${data.phase.toUpperCase()} - DAY ${data.day}`;
+        phaseText.textContent = `${data.phase.toUpperCase()} - DAY ${data.day}`;
         if (data.phase === 'night') {
             document.body.classList.add('night-mode');
             addChatMessage('System', 'Night falls. The city is silent...', 'text-blue-500');

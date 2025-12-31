@@ -32,7 +32,7 @@ app.post("/api/join-room", (req, res) => {
     if (!rooms[roomCode]) {
         rooms[roomCode] = {
             players: [],
-            phase: 'day',
+            phase: 'waiting',
             day: 1
         };
     }
@@ -75,6 +75,40 @@ app.post("/api/vote", (req, res) => {
     });
     
     res.json({ success: true });
+});
+
+app.post("/api/start-game", (req, res) => {
+    const { roomCode } = req.body;
+    const room = rooms[roomCode];
+    
+    if (room && room.players.length >= 4) {
+        room.phase = 'day';
+        
+        // Assign roles (1 Killer, 1 Detective, 1 Doctor, others Townsfolk)
+        const players = [...room.players];
+        const shuffled = players.sort(() => 0.5 - Math.random());
+        
+        shuffled[0].role = 'Killer';
+        shuffled[1].role = 'Detective';
+        shuffled[2].role = 'Doctor';
+        for (let i = 3; i < shuffled.length; i++) {
+            shuffled[i].role = 'Townsfolk';
+        }
+        
+        room.players = shuffled;
+        
+        pusher.trigger(`room-${roomCode}`, "room-update", room);
+        pusher.trigger(`room-${roomCode}`, "phase-change", { phase: 'day', day: 1 });
+        pusher.trigger(`room-${roomCode}`, "new-chat", {
+            user: 'System',
+            message: 'Game Started! Role assignments have been sent.',
+            color: 'text-green-500 font-bold'
+        });
+        
+        res.json({ success: true });
+    } else {
+        res.status(400).json({ success: false, message: 'Need at least 4 players to start' });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
