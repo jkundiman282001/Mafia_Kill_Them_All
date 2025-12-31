@@ -5,14 +5,16 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently \"node server.js\" \"tailwindcss -i ./src/input.css -o ./style.css --watch\"",
-    "build": "npm run build:css",
-    "build:css": "tailwindcss -i ./src/input.css -o ./style.css",
-    "watch:css": "tailwindcss -i ./src/input.css -o ./style.css --watch"
+    "dev": "concurrently \"node server.js\" \"npx tailwindcss -i ./src/input.css -o ./style.css --watch\"",
+    "build": "npx tailwindcss -i ./src/input.css -o ./style.css",
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./style.css",
+    "watch:css": "npx tailwindcss -i ./src/input.css -o ./style.css --watch"
   },
   "dependencies": {
     "concurrently": "^9.2.1",
     "express": "^4.18.2",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0",
     "socket.io": "^4.7.2"
   },
   "devDependencies": {
