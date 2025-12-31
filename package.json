@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently \"node server.js\" \"npx tailwindcss -i ./src/input.css -o ./style.css --watch\"",
-    "build": "node -e \"const { execSync } = require('child_process'); try { execSync('npx tailwindcss -i ./src/input.css -o ./style.css'); } catch (e) { console.error(e); process.exit(1); }\"",
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./style.css",
+    "build": "node node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./style.css",
+    "build:css": "node node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./style.css",
     "watch:css": "npx tailwindcss -i ./src/input.css -o ./style.css --watch"
   },
   "dependencies": {
