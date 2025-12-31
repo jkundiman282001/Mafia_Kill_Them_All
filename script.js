@@ -15,15 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (startButton) {
         startButton.addEventListener('click', () => {
-            window.location.href = 'game-room.html';
+            const username = prompt('Enter your name:') || 'Player';
+            const roomCode = Math.random().toString(36).substring(2, 7).toUpperCase();
+            localStorage.setItem('mafia-username', username);
+            localStorage.setItem('mafia-room', roomCode);
+            window.location.href = `game-room.html?room=${roomCode}`;
         });
     }
 
     if (joinButton) {
         joinButton.addEventListener('click', () => {
-            const roomCode = prompt('Enter Room Code:');
+            const username = prompt('Enter your name:') || 'Player';
+            const roomCode = prompt('Enter Room Code:').toUpperCase();
             if (roomCode) {
-                window.location.href = 'game-room.html';
+                localStorage.setItem('mafia-username', username);
+                localStorage.setItem('mafia-room', roomCode);
+                window.location.href = `game-room.html?room=${roomCode}`;
             }
         });
     }
